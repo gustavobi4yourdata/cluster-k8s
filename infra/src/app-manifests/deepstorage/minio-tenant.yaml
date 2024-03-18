@@ -1,5 +1,5 @@
 apiVersion: argoproj.io/v1alpha1
-kind: StorageClass
+kind: Application
 metadata:
   name: minio-tenant
   namespace: argocd
