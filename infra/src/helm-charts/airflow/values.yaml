@@ -1265,11 +1265,11 @@ webserver:
   defaultUser:
     enabled: true
     role: Admin
-    username: gustavosouza
-    email: gustavosouza_unifei@yahoo.com.br
-    firstName: gustavo
-    lastName: souza
-    password: gustavosouza
+    username: luanmoreno
+    email: luan.moreno@owshq.com
+    firstName: luan moreno
+    lastName: medeiros maciel
+    password: luanmoreno
 
   # Launch additional containers into webserver.
   extraContainers: []
