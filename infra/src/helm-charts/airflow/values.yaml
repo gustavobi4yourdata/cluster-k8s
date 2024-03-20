@@ -1265,11 +1265,11 @@ webserver:
   defaultUser:
     enabled: true
     role: Admin
-    username: admin
+    username: gustavosouza
     email: gustavosouza_unifei@yahoo.com.br
     firstName: gustavo
     lastName: souza
-    password: admin
+    password: gustavosouza
 
   # Launch additional containers into webserver.
   extraContainers: []
