@@ -1266,7 +1266,7 @@ webserver:
     enabled: true
     role: Admin
     username: admin
-    email: gustavo.souza@bi4yourdata.com
+    email: gustavosouza_unifei@yahoo.com.br
     firstName: gustavo
     lastName: souza
     password: admin
