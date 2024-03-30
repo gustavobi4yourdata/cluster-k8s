@@ -428,7 +428,7 @@ data:
 # from cryptography.fernet import Fernet
 # key = Fernet.generate_key()
 # print(key.decode())
-# fernetKey: 6l8z6Z_h_E-K-K7VJHoGU9cAbIzrFBh12OOLV0zQuoM=
+fernetKey: 6l8z6Z_h_E-K-K7VJHoGU9cAbIzrFBh12OOLV0zQuoM=
 fernetKey: ~
 fernetKeySecretName: ~
 
