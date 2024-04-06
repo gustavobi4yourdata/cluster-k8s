@@ -2220,7 +2220,7 @@ elasticsearch:
 # All ports used by chart
 ports:
   flowerUI: 5555
-  airflowUI: 7070
+  airflowUI: 8080
   workerLogs: 8793
   triggererLogs: 8794
   redisDB: 6379
