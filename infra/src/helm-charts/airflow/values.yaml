@@ -951,8 +951,8 @@ scheduler:
         cpu: 100m
         memory: 128Mi
       requests:
-      cpu: 100m
-      memory: 128Mi
+        cpu: 100m
+        memory: 128Mi
     # Detailed default security context for logGroomerSidecar for container level
     securityContexts:
       container: {}
