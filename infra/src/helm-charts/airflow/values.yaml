@@ -123,7 +123,7 @@ images:
     pullPolicy: IfNotPresent
   gitSync:
     repository: registry.k8s.io/git-sync/git-sync
-    tag: v4.1.0
+    tag: v4.2.1
     pullPolicy: IfNotPresent
 
 # Select certain nodes for airflow pods.
@@ -428,7 +428,7 @@ data:
 # from cryptography.fernet import Fernet
 # key = Fernet.generate_key()
 # print(key.decode())
-# fernetKey: 6l8z6Z_h_E-K-K7VJHoGU9cAbIzrFBh12OOLV0zQuoM=
+# fernetKey: t5u8Dst5tkt1F5fwsxnfEwGfytY3Ry5KrP02B32mPxY=
 fernetKey: ~
 fernetKeySecretName: ~
 
@@ -496,7 +496,7 @@ kerberos:
 # Airflow Worker Config
 workers:
   # Number of airflow celery workers in StatefulSet
-  replicas: 3
+  replicas: 2
   # Max number of old replicasets to retain
   revisionHistoryLimit: ~
 
@@ -625,9 +625,9 @@ workers:
     # Enable persistent volumes
     enabled: true
     # Volume size for worker StatefulSet
-    size: 100Gi
+    size: 10Gi
     # If using a custom storageClass, pass name ref to all statefulSets here
-    storageClassName:
+    storageClassName: do-block-storage
     # Execute init container to chown log directory.
     # This is currently only needed in kind, due to usage
     # of local-path provisioner.
@@ -880,13 +880,13 @@ scheduler:
       maxUnavailable: 1
       # minAvailable: 1
 
-  resources: 
-    limits:
-      cpu: 200m
-      memory: 2Gi
-    requests:
-      cpu: 100m
-      memory: 512Mi
+  resources: {}
+  #  limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  #  requests:
+  #   cpu: 100m
+  #   memory: 128Mi
 
   # This setting tells kubernetes that its ok to evict
   # when it wants to scale a node down.
@@ -946,13 +946,13 @@ scheduler:
     args: ["bash", "/clean-logs"]
     # Number of days to retain logs
     retentionDays: 15
-    resources: 
-      limits:
-        cpu: 100m
-        memory: 128Mi
-      requests:
-        cpu: 100m
-        memory: 128Mi
+    resources: {}
+    #  limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    #  requests:
+    #   cpu: 100m
+    #   memory: 128Mi
     # Detailed default security context for logGroomerSidecar for container level
     securityContexts:
       container: {}
@@ -1062,13 +1062,13 @@ createUserJob:
 
   env: []
 
-  resources: 
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
+  resources: {}
+  #  limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  #  requests:
+  #   cpu: 100m
+  #   memory: 128Mi
 
 # Airflow database migration job settings
 migrateDatabaseJob:
@@ -1122,13 +1122,13 @@ migrateDatabaseJob:
     # Annotations to add to migrate database job kubernetes service account.
     annotations: {}
 
-  resources: 
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
+  resources: {}
+  #  limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  #  requests:
+  #   cpu: 100m
+  #   memory: 128Mi
 
   # Launch additional containers into database migration job
   extraContainers: []
@@ -1253,23 +1253,23 @@ webserver:
       ports:
         - port: "{{ .Values.ports.airflowUI }}"
 
-  resources: 
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
+  resources: {}
+  #   limits:
+  #     cpu: 100m
+  #     memory: 128Mi
+  #   requests:
+  #     cpu: 100m
+  #     memory: 128Mi
 
   # Create initial user.
   defaultUser:
     enabled: true
     role: Admin
-    username: luanmoreno
-    email: luan.moreno@owshq.com
-    firstName: luan moreno
-    lastName: medeiros maciel
-    password: luanmoreno
+    username: admin
+    email: gustavo.souza@4bi4yourdata.com
+    firstName: Gustavo
+    lastName: Souza
+    password: admin123
 
   # Launch additional containers into webserver.
   extraContainers: []
@@ -1432,7 +1432,7 @@ triggerer:
     # Enable persistent volumes
     enabled: true
     # Volume size for triggerer StatefulSet
-    size: 100Gi
+    size: 10Gi
     # If using a custom storageClass, pass name ref to all statefulSets here
     storageClassName:
     # Execute init container to chown log directory.
@@ -1442,13 +1442,13 @@ triggerer:
     # Annotations to add to triggerer volumes
     annotations: {}
 
-  resources: 
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
+  resources: {}
+  #  limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  #  requests:
+  #   cpu: 100m
+  #   memory: 128Mi
 
   # Grace period for triggerer to finish after SIGTERM is sent from kubernetes
   terminationGracePeriodSeconds: 60
@@ -2312,8 +2312,8 @@ postgresql:
   auth:
     enablePostgresUser: true
     postgresPassword: postgres
-    username: ""
-    password: ""
+    username: icaro
+    password: super4bi
 
 # Config settings to go into the mounted airflow.cfg
 #
@@ -2449,8 +2449,8 @@ dags:
     # git repo clone url
     # ssh example: git@github.com:apache/airflow.git
     # https example: https://github.com/apache/airflow.git
-    repo: git@github.com:gustavobi4yourdata/cluster-k8s.git         # https://github.com/gustavobi4yourdata/cluster-k8s.git
-    branch: master
+    repo: git@github.com:gustavobi4yourdata/cluster-k8s-dev.git #https://github.com/IcaroMC/stackk8s-new.git
+    branch: main
     rev: HEAD
     # The git revision (branch, tag, or hash) to check out, v4 only
     ref: master
@@ -2473,7 +2473,7 @@ dags:
     #   data:
     #     # key needs to be gitSshKey
     #     gitSshKey: <base64_encoded_data>
-    # and specify the name of the secret below
+    # and specify the name of the secret below  
     sshKeySecret: airflow-ssh-git-secret
     #
     # If you are using an ssh private key, you can additionally
@@ -2521,13 +2521,13 @@ dags:
     #   sizeLimit: 1Gi
     #   medium: Memory
 
-    resources: 
-      limits:
-        cpu: 100m
-        memory: 128Mi
-      requests:
-        cpu: 100m
-        memory: 128Mi
+    resources: {}
+    #  limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    #  requests:
+    #   cpu: 100m
+    #   memory: 128Mi
 
 logs:
   # Configuration for empty dir volume (if logs.persistence.enabled == false)
@@ -2539,7 +2539,7 @@ logs:
     # Enable persistent volume for storing logs
     enabled: false
     # Volume size for logs
-    size: 100Gi
+    size: 10Gi
     # Annotations for the logs PVC
     annotations: {}
     # If using a custom storageClass, pass name here
