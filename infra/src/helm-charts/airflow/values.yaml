@@ -67,7 +67,7 @@ airflowHome: /opt/airflow
 # Default airflow repository -- overridden by all the specific images below
 defaultAirflowRepository: apache/airflow
 
-# Default airflow tag to deploy 2.8.1
+# Default airflow tag to deploy
 defaultAirflowTag: "2.8.1"
 
 # Default airflow digest. If specified, it takes precedence over tag
@@ -79,7 +79,6 @@ airflowVersion: "2.8.1"
 # Images
 images:
   airflow:
-    #repository: owshq/owshq-apache-airflow
     repository: owshq/owshq-apache-airflow
     tag: 2.8.1
     # repository: ~
@@ -431,7 +430,7 @@ data:
 # print(key.decode())
 # fernetKey: t5u8Dst5tkt1F5fwsxnfEwGfytY3Ry5KrP02B32mPxY=
 fernetKey: ~
-fernetKeySecretName: airflow-fernet-key
+fernetKeySecretName: ~
 
 # Flask secret key for Airflow Webserver: `[webserver] secret_key` in airflow.cfg
 webserverSecretKey: 289199280de8afee5d0ef80418dbb52a
@@ -626,7 +625,7 @@ workers:
     # Enable persistent volumes
     enabled: true
     # Volume size for worker StatefulSet
-    size: 5Gi
+    size: 100Gi
     # If using a custom storageClass, pass name ref to all statefulSets here
     storageClassName:
     # Execute init container to chown log directory.
@@ -1433,7 +1432,7 @@ triggerer:
     # Enable persistent volumes
     enabled: true
     # Volume size for triggerer StatefulSet
-    size: 5Gi
+    size: 100Gi
     # If using a custom storageClass, pass name ref to all statefulSets here
     storageClassName:
     # Execute init container to chown log directory.
@@ -2114,7 +2113,7 @@ pgbouncer:
 
 # Configuration for the redis provisioned by the chart
 redis:
-  enabled: false
+  enabled: true
   terminationGracePeriodSeconds: 600
 
   # Create ServiceAccount
@@ -2450,8 +2449,8 @@ dags:
     # git repo clone url
     # ssh example: git@github.com:apache/airflow.git
     # https example: https://github.com/apache/airflow.git
-    repo: git@github.com:gustavobi4yourdata/cluster-k8s.git       
-    branch: main
+    repo: git@github.com:gustavobi4yourdata/cluster-k8s.git
+    branch: master
     rev: HEAD
     # The git revision (branch, tag, or hash) to check out, v4 only
     ref: master
@@ -2461,7 +2460,7 @@ dags:
     # subpath within the repo where dags are located
     # should be "" if dags are at repo root
     subPath: "data/dags"
-    #credentialsSecret: git-credentials
+    # credentialsSecret: git-credentials
     #
     #
     # If you are using an ssh clone url, you can load
@@ -2475,7 +2474,7 @@ dags:
     #     # key needs to be gitSshKey
     #     gitSshKey: <base64_encoded_data>
     # and specify the name of the secret below
-    sshKeySecret: airflow-ssh-git-secret
+    sshKeySecret: airflow-ssh-secret
     #
     # If you are using an ssh private key, you can additionally
     # specify the content of your known_hosts file, example:
@@ -2540,7 +2539,7 @@ logs:
     # Enable persistent volume for storing logs
     enabled: false
     # Volume size for logs
-    size: 5Gi
+    size: 100Gi
     # Annotations for the logs PVC
     annotations: {}
     # If using a custom storageClass, pass name here
